@@ -4,26 +4,31 @@ on:
   push:
     branches:
       - main
+
 jobs:
   demo-job:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Action Started"
+      
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: run a line script
-        uses: echo hello world
-      - name: Multiline script 
-        uses: |
-          echo mutiline one 
-          echo mutiline two
+        run: echo "hello world"
+
+      - name: Multiline script
+        run: |
+          echo "multiline one"
+          echo "multiline two"
+
       - name: list file
         run: ls ${{github.workspace}}
+
       - name: Print github context
         env: 
           GITHUB_CONTEXT: ${{toJson(github)}}
         run: echo "$GITHUB_CONTEXT"
+
       - name: Action completed
-        run: echo Action Completed
-
-
+        run: echo "Action Completed"
